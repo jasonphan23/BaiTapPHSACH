@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Index</h2>@using PHSACH.Models
+@model IEnumerable<PHIEUXUAT>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+@Html.ActionLink("Thêm Phiếu Xuất", "XuatSach", "QuanLiPhieuXuat")
+<br />
+<div class="text-center">
+    <table width="100%" class="table table-bordered">
+        <tr>
+            <th>Mã Đại Lý</th>
+
+            <th>Tên Đại Lý</th>
+            <th>Ngày Xuất</th>
+            <th>Tổng Tiền</th>
+            <th>Trạng Thái</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (PHIEUXUAT s in Model)
+        {
+            <tr>
+                <td>@s.MaDL</td>
+                <td>#</td>
+                <td>@s.NgayXuat</td>
+                <td>@s.TongTien.Value.ToString("#,##") VNĐ</td>
+                @if (s.TrangThai == false)
+                {
+                    <td>Chưa thanh toán</td>
+                }
+                else
+                {
+                    <td>Đã thanh toán</td>
+                }
+                <td>@Html.ActionLink("Xem Chi Tiết", "XemChiTiet", new { @MaPX = s.MaPX })</td>
+                <td>@Html.ActionLink("Cập Nhật Trạng Thái", "CapNhatTrangThai", new { @MaPX = s.MaPX })</td>
+            </tr>
+        }
+    </table>
+</div>
+

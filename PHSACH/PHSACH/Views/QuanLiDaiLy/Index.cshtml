@@ -1,0 +1,66 @@
+﻿@using PHSACH.Models
+@model IEnumerable<DAILY>
+
+@{
+    ViewBag.Title = "IndexDaiLy";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+
+<br />
+
+<div>
+    <table width="100%" class="table table-bordered">
+        <caption ><h1>Thông tin đại lý</h1></br></caption>
+        <tr>
+            <th>Mã đại lý</th>
+            <th>Tên đại lý</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Trạng Thái</th>
+            <th>*</th>
+            <th>*</th>
+        </tr>
+        @foreach (DAILY dl in Model)
+        {
+            <tr>
+                <td>@dl.MaDL</td>
+                <td>@dl.Ten</td>
+                <td>@dl.DiaChi</td>
+                <td>@dl.SoDT</td> 
+                <td>@dl.TrangThai</td>  
+                <td  align="center"><a href="/QuanLiDaiLy/CapNhatDaiLy/@dl.MaDL"><input name="Suadaily" value="Cập nhật" type="button" /></a></td>   
+                <td align="center"><a href="#" class="btn btn-xs btn-danger"><span class="fa-close" onclick="if(confirm('Bạn có chắc chắn muốn thay đổi trạng thái đại lý?')) window.location.href ='/QuanLiDaiLy/XoaDaiLy/@dl.MaDL'">Thay đổi trạng thái</span></a></td>         
+            </tr>
+        }
+
+    </table>
+    <a href="/QuanLiDaiLy/ThemDaiLy" > <input width="5%" name="Themdaily" value="Thêm Đại Lý" type="button" /></a>
+    
+    
+</div>
+<script>
+    function XoaDL() {
+
+
+
+    }
+</script>
+<style>
+    table {
+        width: 100%;
+        border: 1px 1px solid;
+    }
+
+        table img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 130px;
+            height: 200px;
+        }
+
+        table th {
+            text-align: center;
+        }
+</style>

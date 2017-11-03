@@ -1,0 +1,54 @@
+﻿@using PHSACH.Models
+@model PHIEUXUAT
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    List<CT_PHIEUXUAT> list = ViewBag.DS_CTPhieuXuat as List<CT_PHIEUXUAT>;
+}
+
+<div class="form-group col-md-12">
+    <div class="col-md-2" style="text-align: center">
+        <label class="control-label">Đại lý</label>
+    </div>
+    <div class="col-md-4">
+        @*@Html.DropDownListFor(m => m.MaDL, ViewBag.DS_DaiLy as SelectList, new { @class = "form-control" })*@
+        <input type="text" value="@Model.DAILY.Ten" class="form-control" />
+    </div>
+</div>
+
+<div class="form-group col-md-12">
+    <div class="col-md-2" style="text-align: center">
+        <label class="control-label">Ngày xuất</label>
+    </div>
+    <div class="col-md-4">
+        <input type="text" value="@Model.NgayXuat" class="form-control" />
+    </div>
+</div>
+
+<div style="clear:both">
+    <br />
+</div>
+
+<table class="table table-bordered text-center">
+    <tr>
+        <th>Mã Sách</th>
+        <th>Tên Sách</th>
+        <th>Giá xuất</th>
+        <th>Số Lượng</th>
+        <th>Thành Tiền</th>
+    </tr>
+    @foreach (CT_PHIEUXUAT s in ViewBag.DS_CTPhieuXuat as IEnumerable<CT_PHIEUXUAT>)
+    {
+        <tr>
+            <td>@s.MaSach</td>
+            <td>@s.SACH.TenSach</td>
+            <td>@s.DonGia.Value.ToString("#,##")</td>
+            <td>@s.SLXuat</td>
+            <td>@s.ThanhTien.Value.ToString("#,##")</td>
+        </tr>
+    }
+</table>
+<h2 style="float: right">Tổng tiền: @Model.TongTien.Value.ToString("#,##") VNĐ</h2>
+<div style="clear: both">
+    @Html.ActionLink("Back to List", "Index")
+</div>

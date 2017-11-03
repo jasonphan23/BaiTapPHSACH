@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="40abe9a35ca346a8a1c8f1d4122bc182" Name="Diagram1">
+        <EntityTypeShape EntityType="PhatHanhSachModel.BAOCAODL" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.CONGNO_DL" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.CONGNO_NXB" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.CT_BAOCAODL" Width="1.5" PointX="8.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.CT_DOANHSO" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.CT_PHIEUNHAP" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.CT_PHIEUXUAT" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.CHUCVU" Width="1.5" PointX="8.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.DAILY" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.DOANHSO" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.NGUOIDUNG" Width="1.5" PointX="11" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.NHAXUATBAN" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.PHIEUNHAP" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.PHIEUXUAT" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.SACH" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.TONKHO" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhatHanhSachModel.TONKHODL" Width="1.5" PointX="8.25" PointY="18.625" IsExpanded="true" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__BAOCAODL__MaDL__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_BAOCAO__MaBCD__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CONGNO_DL__MaDL__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CONGNO_NX__MaNXB__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_BAOCAO__MaSac__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_DOANHS__MaSac__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_DOANHSO__MaDS__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_PHIEUN__MaSac__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_PHIEUNH__MaPN__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_PHIEUX__MaSac__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__CT_PHIEUXU__MaPX__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__NGUOIDUNG__MaCV__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__PHIEUXUAT__MaDL__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__TONKHODL__MaDL__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__DOANHSO__MaNXB__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__PHIEUNHAP__MaNXB__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__SACH__MaNXB__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__TONKHO__MaSach__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="PhatHanhSachModel.FK__TONKHODL__MaSach__34C8D9D1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

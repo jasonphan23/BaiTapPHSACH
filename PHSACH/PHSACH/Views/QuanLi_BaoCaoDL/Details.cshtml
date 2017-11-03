@@ -1,0 +1,95 @@
+﻿@model PHSACH.Models.BAOCAODL
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<h2>Chi tiết BAOCAODL</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Tên Đại lý")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DAILY.Ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Thời Gian")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGian)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Thanh Toán")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThanhToan)
+        </dd>
+
+    </dl>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Mã Sách")
+        </th>
+        <th>
+            @Html.DisplayName("Tên Sách")
+        </th>
+        <th>
+            @Html.DisplayName("Số Lượng")
+        </th>
+        <th>
+            @Html.DisplayName("Đơn Giá")
+        </th>
+        <th>
+            @Html.DisplayName("Thành Tiền")
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.CT_BAOCAODL != null)
+    {
+        foreach (var item in Model.CT_BAOCAODL)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SACH.TenSach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonGiaBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThanhTien)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                Không có chi tiết
+            </td>
+        </tr>
+    }
+</table>
+
+
+    <p>
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaBCDL }) |
+        @Html.ActionLink("Về danh sách", "Index")
+    </p>

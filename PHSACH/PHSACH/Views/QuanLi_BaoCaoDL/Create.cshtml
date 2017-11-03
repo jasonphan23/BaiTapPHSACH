@@ -1,0 +1,139 @@
+﻿@using PHSACH.Models
+@model PHSACH.Models.BAOCAODLviewmodel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+
+    window.onload = function () {
+        $(document).ready(function () {
+            console.log("ready!");
+            $("#datepicker").datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true, //Tùy chọn này cho phép người dùng chọn tháng
+                changeYear: true //Tùy chọn này cho phép người dùng lựa chọn từ phạm vi năm
+            });
+            $("#TenSach").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/BAOCAODLs/Search/',
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#masach").val(i.item.id);
+                },
+                minLength: 1
+            });
+        });
+        var dynamicId = 0;
+        $('#btnAdd').click(function () {
+            dynamicId += 1
+            $('#chitiet').append(
+                "<tr>" +
+                "<td>" + $('#masach').val() + "</td>" +
+                "<td>" + $('#TenSach').val() + "</td>" +
+                '<td><input type="number" class="form-control" id = "DonGia" name="ct[' + (dynamicId - 1) + '].DonGia"/></td>' +
+                '<td><input type="number" class="form-control" id = "SLBan" name="ct[' + (dynamicId - 1) + '].SoLuongBan"/></td>' +
+                '<td><input type="number" class="form-control" id = "ThanhTien" name="ct[' + (dynamicId - 1) + '].ThanhTien"/></td>' +
+                '<td><button class="btn btn-danger btnDelete">Delete</button></td>' +
+                '<input type="hidden" name="ct.Index" value="' + (dynamicId - 1) + '" />' +
+                '<input type="hidden" name="ct[' + (dynamicId - 1) + '].MaSach" value="' + $('#masach').val() + '" />' +
+                "</tr>"
+            )
+        });
+
+        $("#chitiet").on('click', '.btn.btn-danger.btnDelete', function () {
+            $(this).closest('tr').find("input[type='hidden']").remove();
+            $(this).closest('tr').remove();
+        });
+
+    }
+</script>
+
+@using (@Html.BeginForm("Create", "BAOCAODLs", FormMethod.Post,null))
+{
+    @Html.AntiForgeryToken()
+
+    <div style="margin-top: 20px" class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-2" style="text-align: center">
+                @Html.Label("Tên Đại lý", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-4">
+                    @Html.DropDownList("BAOCAODL.MaDL", ViewBag.MaDL as SelectList, htmlAttributes: new { @class = "form-control"})
+                    
+                    @Html.ValidationMessageFor(model => model.BAOCAODL.MaDL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="text-align: center">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.BAOCAODL.ThoiGian, "Thời gian", htmlAttributes: new { @class = "control-label"})
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BAOCAODL.ThoiGian, new { htmlAttributes = new { @class = "form-control" , @id="datepicker" } })
+                @Html.ValidationMessageFor(model => model.BAOCAODL.ThoiGian, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="text-align: center">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.BAOCAODL.ThanhToan, "Thanh toán", htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.BAOCAODL.ThanhToan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BAOCAODL.ThanhToan, "", new { @class = "text-danger" })
+                <input type="hidden" name="BAOCAODL.TrangThai" value="true" />
+            </div>
+        </div>
+
+        <div class="form-group" style="text-align: center">
+            <div class="col-md-2">
+                <label class="control-label">Tên Sách</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="TenSach" name="TenSach" class="form-control" />
+                <input type="hidden" id="masach" name="masach" />
+            </div>
+            <div class="col-md-1">
+                <input type="button" id="btnAdd" class="btn btn-primary" value="Thêm chi tiết báo cáo" />
+            </div>
+        </div>
+        <table class="table table-bordered" id="chitiet">
+            <tr>
+                <td>Mã Sách</td>
+                <td>Tên Sách</td>
+                <td>Đơn giá</td>
+                <td>Số Lượng</td>
+                <td>Thành tiền</td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="form-group" style="text-align: center">
+            <input type="submit" value="Lưu Báo Cáo" class="btn btn-primary" id="test" />
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Về danh sách", "Index")
+</div>
+

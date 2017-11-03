@@ -1,0 +1,141 @@
+﻿@using PHSACH.Models
+@using PhatHanhSach.Models.ViewModels
+@model DAILY
+
+@{
+    ViewBag.Title = "XuatSach";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    int TongTien = 0;
+}
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script type="text/javascript">
+        $(function () {
+            $("#TenSach").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/QuanLyPhieuXuat/Search/',
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#MaSach").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#datepicker").datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true, //Tùy chọn này cho phép người dùng chọn tháng
+            changeYear: true //Tùy chọn này cho phép người dùng lựa chọn từ phạm vi năm
+        });
+    })
+</script>
+
+@using (@Html.BeginForm())
+{
+    <div class="form-group col-md-12">
+        <h2> Xuất kho </h2>
+        <div class="col-md-2" style="text-align: center">
+            <label class="control-label">Đại lý</label>
+        </div>
+        <div class="col-md-4">
+
+            @*@Html.DropDownListFor(m => m.MaDL, ViewBag.DS_DaiLy as SelectList, new { @class = "form-control" })*@
+            @Html.DropDownList("MaDL", ViewBag.DS_DaiLy as SelectList, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <div class="col-md-2" style="text-align: center">
+            <label class="control-label">Ngày xuất</label>
+        </div>
+        <div class="col-md-4">
+            <input type="text" id="datepicker" name="NgayXuat" class="form-control" />
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <h4> Chi tiết phiếu xuất </h4>
+        <div>
+            <label class="control-label col-lg-1">Tên Sách</label>
+            <div class="col-lg-3">
+                <input type="text" id="TenSach" name="TenSach" class="form-control" />
+                <input type="hidden" id="MaSach" name="MaSach" />
+            </div>
+        </div>
+        <div>
+            <label class="control-label col-lg-1">Đơn Giá</label>
+            <div class="col-lg-3">
+                <input type="text" id="DonGia" name="DonGia" class="form-control" />
+            </div>
+        </div>
+        <div>
+            <label class="control-label col-lg-1">Số Lượng</label>
+            <div class="col-lg-3">
+                <input type="text" id="SLXuat" name="SLXuat" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="text-center" style="float: right">
+        <button formmethod="post" formaction="ThemChiTiet" class="btn btn-primary ">Thêm Sách</button>
+    </div>
+
+    <div style="clear:both">
+        <br />
+    </div>
+
+    <table class="table table-bordered text-center">
+        <tr>
+            <th>Mã Sách</th>
+            <th>Tên Sách</th>
+            <th>Giá Xuất</th>
+            <th>Số Lượng</th>
+            <th>Thành Tiền</th>
+            <th></th>
+        </tr>
+        @if (Session["DS_Sach"] != null)
+        {
+            foreach (var s in Session["DS_Sach"] as List<CT_PhieuXuatViewModel>)
+            {
+                <tr>
+                    <td>@s.MaSach</td>
+                    <td>@s.TenSach</td>
+                    <td>@s.DonGia.ToString("#,##")</td>
+                    <td>@s.SLXuat</td>
+                    <td>@s.ThanhTien.ToString("#,##")</td>
+                    <td>
+                        @Html.ActionLink("Xóa", "XoaChiTiet", new { @MaSach = s.MaSach })
+                    </td>
+                </tr>
+                TongTien += s.ThanhTien;
+            }
+        }
+    </table>
+    if (TongTien != 0)
+    {
+        <h2 style="float: right">Tổng tiền: @TongTien.ToString("#,##") VNĐ</h2>
+        <br />
+    }
+
+    <button formmethod="post" formaction="XuatSach" class="btn btn-danger" style="float: right; clear:both">Lưu</button>
+}

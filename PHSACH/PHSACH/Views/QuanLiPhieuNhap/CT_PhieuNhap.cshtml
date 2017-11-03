@@ -1,0 +1,60 @@
+﻿@using PHSACH.Models
+@model IEnumerable<CT_PHIEUNHAP>
+    @{
+        ViewBag.Title = "CT_PhieuNhap";
+        Layout = "~/Views/Layout/AdminLayout.cshtml";
+    }
+
+    <h2>CT_PhieuNhap</h2>
+    <body class="menu-affix">
+        <div class="col-lg-12">
+            <div class="box inverse">
+                                <!-- Them Sach Vao Bang -->
+                <div id="div-2" class="body collapse in" aria-expanded="true" style="position:relative">
+                        <div class="form-group">
+                            <label class="control-label col-lg-4">Tên NXB</label>
+                            <div class="col-lg-4">
+                                <input type="text" name="MaSach" id="MaSach" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-4">Ngày Nhập</label>
+                            <div class="col-lg-4">
+                                <input type="text" name="MaSach" id="MaSach" />
+                            </div>
+                        </div>
+                </div>
+                <div id="div-2" class="body collapse in" aria-expanded="true" style="position:relative">
+                    
+                        <div id="collapse4" class="body">
+                            <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Sách</th>
+                                        <th>Tên Sách</th>
+                                        <th>Giá Nhập</th>
+                                        <th>Số Lượng</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var s in Model)
+                                    {
+                                        <tr class="sachmodel">
+                                            <td class="masach">@s.MaSach</td>
+                                            <td class="tensach">@s.SACH.TenSach</td>
+                                            <td class="giasach">@s.DonGia</td>
+                                            <td class="soluong">@s.SLNhap</td>
+                                            
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <!-- Ket Thuc Tao Phieu Nhap -->
+            </div>
+        </div>
+    </body>
+

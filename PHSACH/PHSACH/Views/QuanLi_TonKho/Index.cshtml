@@ -1,0 +1,35 @@
+﻿@using PHSACH.Models;
+@model List<TONKHO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<script type="text/javascript">
+    window.onload = function () {
+        $(document).ready(function () {
+            console.log("ready!");
+            $("#date_congnondl").datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true, //Tùy chọn này cho phép người dùng chọn tháng
+                changeYear: true //Tùy chọn này cho phép người dùng lựa chọn từ phạm vi năm
+            });
+        })
+    };
+</script>
+<h1> Công nợ đại lí </h1>
+<form class="form-horizontal" action="@Url.Action("TonKhoSach","QuanLi_TonKho")" method="POST">
+    <div class="form-group">
+        <label for="text1" class="control-label col-lg-4"> Chọn ngày:</label>
+        <div class="col-lg-3">
+            <div class="row">
+             <input type="text" id = "date_congnondl" class="form-control" name="date_tonkhosach" />    
+             <input type="submit" id="btn_datecongnodl" class="btn btn-metis-5" value="Lọc"/>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<!-- Table -->
+
+
